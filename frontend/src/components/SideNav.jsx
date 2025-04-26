@@ -4,7 +4,9 @@ import {
   Box, Divider, useTheme
 } from '@mui/material';
 import {
-  Dashboard, Hotel, CalendarMonth, People, Logout, Book
+  Dashboard, Hotel, CalendarMonth, People, Logout, Book,
+  CarRental,
+  CarRepairOutlined
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -17,10 +19,12 @@ const SideNav = () => {
 
   const menu = [
     { text: 'Dashboard', icon: <Dashboard />, path: '/dashboard' },
-    { text: 'Room Inventory', icon: <Hotel />, path: '/inventory' },
-    { text: 'Room Reservations', icon: <CalendarMonth />, path: '/reservations' },
-    { text: 'Reserved Rooms', icon: <Book />, path: '/reserved-rooms' },
+    { text: 'Car List', icon: <Hotel />, path: '/car-list' },
+    {text :'My Rentals' , icon: <CarRepairOutlined/>, path: '/my-rentals'},
+    // { text: 'Room Reservations', icon: <CalendarMonth />, path: '/reservations' },
+    // { text: 'Reserved Rooms', icon: <Book />, path: '/reserved-rooms' },
     { text: 'User Management', icon: <People />, path: '/users' },
+    {text :'Car Rentals' , icon: <CarRental/>, path: '/manage-rentals'}
   ];
 
   const handleLogout = () => {

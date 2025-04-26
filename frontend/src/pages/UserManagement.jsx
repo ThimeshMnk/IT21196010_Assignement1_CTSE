@@ -16,7 +16,7 @@ const UserManagement = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('https://hotel-backend-124923079078.asia-south1.run.app/api/auth/users', {
+      const res = await axios.get('http://localhost:5000/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -43,7 +43,7 @@ const UserManagement = () => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://hotel-backend-124923079078.asia-south1.run.app/api/auth/users/${id}`, {
+      await axios.delete(`http://localhost:5000/api/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchUsers();
@@ -55,9 +55,11 @@ const UserManagement = () => {
   const handleEditSubmit = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`https://hotel-backend-124923079078.asia-south1.run.app/api/auth/users/${selectedUser._id}`, selectedUser, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.put(
+        `http://localhost:5000/api/users/${selectedUser._id}`,
+        selectedUser,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       handleEditClose();
       fetchUsers();
     } catch (err) {
@@ -81,7 +83,8 @@ const UserManagement = () => {
               <TableCell sx={{ color: 'white' }}>Name</TableCell>
               <TableCell sx={{ color: 'white' }}>Email</TableCell>
               <TableCell sx={{ color: 'white' }}>Mobile</TableCell>
-              <TableCell sx={{ color: 'white' }}>NIC</TableCell>
+              <TableCell sx={{ color: 'white' }}>Address</TableCell>
+              <TableCell sx={{ color: 'white' }}>License #</TableCell>
               <TableCell sx={{ color: 'white' }}>User Type</TableCell>
               <TableCell sx={{ color: 'white' }}>Actions</TableCell>
             </TableRow>
@@ -92,14 +95,18 @@ const UserManagement = () => {
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.mobile}</TableCell>
-                <TableCell>{user.nic}</TableCell>
+                <TableCell>{user.address}</TableCell>
+                <TableCell>{user.driverLicenseNumber}</TableCell>
                 <TableCell>
                   <Box
                     sx={{
                       display: 'inline-block',
                       px: 1.5,
                       py: 0.5,
-                      backgroundColor: user.userType === 'admin' ? '#2563EB' : user.userType === 'manager' ? '#10B981' : '#EAB308',
+                      backgroundColor:
+                        user.userType === 'admin'
+                          ? '#2563EB'
+                          : '#EAB308',
                       color: 'white',
                       borderRadius: '12px',
                       fontSize: '0.75rem',
@@ -110,8 +117,12 @@ const UserManagement = () => {
                   </Box>
                 </TableCell>
                 <TableCell>
-                  <IconButton color="primary" onClick={() => handleEditOpen(user)}><Edit /></IconButton>
-                  <IconButton color="error" onClick={() => handleDelete(user._id)}><Delete /></IconButton>
+                  <IconButton color="primary" onClick={() => handleEditOpen(user)}>
+                    <Edit />
+                  </IconButton>
+                  <IconButton color="error" onClick={() => handleDelete(user._id)}>
+                    <Delete />
+                  </IconButton>
                 </TableCell>
               </TableRow>
             ))}
@@ -123,11 +134,54 @@ const UserManagement = () => {
       <Dialog open={editOpen} onClose={handleEditClose} fullWidth maxWidth="sm">
         <DialogTitle>Edit User</DialogTitle>
         <DialogContent>
-          <TextField name="name" label="Name" fullWidth margin="normal" value={selectedUser?.name || ''} onChange={handleChange} />
-          <TextField name="email" label="Email" fullWidth margin="normal" value={selectedUser?.email || ''} onChange={handleChange} />
-          <TextField name="mobile" label="Mobile" fullWidth margin="normal" value={selectedUser?.mobile || ''} onChange={handleChange} />
-          <TextField name="nic" label="NIC" fullWidth margin="normal" value={selectedUser?.nic || ''} onChange={handleChange} />
-          <TextField name="userType" label="User Type" fullWidth margin="normal" value={selectedUser?.userType || ''} onChange={handleChange} />
+          <TextField
+            name="name"
+            label="Name"
+            fullWidth
+            margin="normal"
+            value={selectedUser?.name || ''}
+            onChange={handleChange}
+          />
+          <TextField
+            name="email"
+            label="Email"
+            fullWidth
+            margin="normal"
+            value={selectedUser?.email || ''}
+            onChange={handleChange}
+          />
+          <TextField
+            name="mobile"
+            label="Mobile"
+            fullWidth
+            margin="normal"
+            value={selectedUser?.mobile || ''}
+            onChange={handleChange}
+          />
+          <TextField
+            name="address"
+            label="Address"
+            fullWidth
+            margin="normal"
+            value={selectedUser?.address || ''}
+            onChange={handleChange}
+          />
+          <TextField
+            name="driverLicenseNumber"
+            label="Driver License #"
+            fullWidth
+            margin="normal"
+            value={selectedUser?.driverLicenseNumber || ''}
+            onChange={handleChange}
+          />
+          <TextField
+            name="userType"
+            label="User Type"
+            fullWidth
+            margin="normal"
+            value={selectedUser?.userType || ''}
+            onChange={handleChange}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleEditClose}>Cancel</Button>

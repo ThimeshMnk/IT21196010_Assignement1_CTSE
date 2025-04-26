@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://hotel-backend-124923079078.asia-south1.run.app/api/auth'; // Change this for production
+const BASE_URL = 'http://localhost:5000/api/auth'; // Change this for production
 
 // Register new user
 export const registerUser = async (userData) => {
@@ -9,5 +9,9 @@ export const registerUser = async (userData) => {
 
 // Login existing user
 export const loginUser = async (credentials) => {
-  return await axios.post(`${BASE_URL}/login`, credentials);
+  const { data } = await axios.post('http://localhost:5000/api/auth/login', credentials);
+  localStorage.setItem('token', data.token);
+  localStorage.setItem('user', JSON.stringify(data.user));
+  localStorage.setItem('userType', data.userType);
+  return data;
 };

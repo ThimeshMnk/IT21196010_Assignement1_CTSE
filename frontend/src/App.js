@@ -24,17 +24,19 @@
 
 // export default App;
 
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import RoomInventory from './pages/RoomInventory';
-import Reservations from './pages/Reservations';
-import Users from './pages/UserManagement';
-import Layout from './components/Layout';
-import ReservedRooms from './pages/ReservedRooms';
-
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import CarsList from "./pages/RoomInventory";
+import Reservations from "./pages/Reservations";
+import Users from "./pages/UserManagement";
+import Layout from "./components/Layout";
+import ReservedRooms from "./pages/ReservedRooms";
+import ManageRentals from "./pages/ManageRentals";
+import ViewAndRent from "./pages/ViewAndRent";
+import MyRentals from './pages/MyRentals';
 function App() {
   return (
     <Router>
@@ -46,23 +48,69 @@ function App() {
         {/* Dashboard routes with shared SideNav layout */}
         <Route
           path="/dashboard"
-          element={<Layout><Dashboard /></Layout>}
+          element={
+            <Layout>
+              <Dashboard />
+            </Layout>
+          }
         />
         <Route
-          path="/inventory"
-          element={<Layout><RoomInventory /></Layout>}
+          path="/car-list"
+          element={
+            <Layout>
+              <CarsList />
+            </Layout>
+          }
         />
         <Route
           path="/reservations"
-          element={<Layout><Reservations /></Layout>}
+          element={
+            <Layout>
+              <Reservations />
+            </Layout>
+          }
         />
-        <Route 
-          path="/reserved-rooms" 
-          element={<Layout><ReservedRooms /></Layout>} 
+        <Route
+          path="/reserved-rooms"
+          element={
+            <Layout>
+              <ReservedRooms />
+            </Layout>
+          }
         />
         <Route
           path="/users"
-          element={<Layout><Users /></Layout>}
+          element={
+            <Layout>
+              <Users />
+            </Layout>
+          }
+        />
+        <Route
+          path="/manage-rentals"
+          element={
+            <Layout>
+              <ManageRentals />{" "}
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/view-and-rent/:id"
+          element={
+            <Layout>
+              <ViewAndRent />{" "}
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/my-rentals"
+          element={
+            <Layout>
+              <MyRentals />{" "}
+            </Layout>
+          }
         />
       </Routes>
     </Router>
