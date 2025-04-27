@@ -1,30 +1,36 @@
 version: '3.8'
-
 services:
-  mongodb:
-    image: mongo
-    container_name: mongo
-    ports:
-      - '27017:27017'
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
     volumes:
-      - mongo-data:/data/db
+      - mongo_data:/data/db
+    ports:
+      - "27018:27017"
 
   backend:
-    build: ./Backend
+    build:
+      context: ./backend
+    env_file: 
+      - ./backend/.env       # contains MONGO_URI, JWT_SECRET, etc.
+    depends_on:
+      - mongo
     ports:
       - '5000:5000'
+    # Override your MONGO_URI to point at the mongo service:
     environment:
-      - MONGO_URI=mongodb://mongo:27017/hotel
-      - JWT_SECRET=your_jwt_secret
-    depends_on:
-      - mongodb
+      - MONGO_URI=mongodb://mongo:27017/Cars
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
     ports:
-      - '3000:3000'
+      - '3001:80'
     depends_on:
       - backend
+    # If you need to configure the API URL at runtime, you can:
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000/api
 
 volumes:
-  mongo-data:
+  mongo_data:

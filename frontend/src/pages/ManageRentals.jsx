@@ -139,7 +139,7 @@ const ManageRentals = () => {
                 <TableCell>{new Date(r.startDate).toLocaleDateString()}</TableCell>
                 <TableCell>{new Date(r.endDate).toLocaleDateString()}</TableCell>
                 <TableCell>{r.status}</TableCell>
-                <TableCell>₹{r.totalCost}</TableCell>
+                <TableCell>LKR {r.totalCost}</TableCell>
                 <TableCell>
                   <IconButton color="primary" onClick={() => handleEditOpen(r)}>
                     <Edit />
