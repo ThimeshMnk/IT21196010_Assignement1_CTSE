@@ -5,26 +5,25 @@ import {
 } from '@mui/material';
 import {
   Dashboard, Hotel, CalendarMonth, People, Logout, Book,
-  CarRental,
-  CarRepairOutlined
+  CarRental,CarRepairOutlined
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 const SideNav = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const theme = useTheme();
+  const nav = useNavigate();
+  const loc = useLocation();
+  const role = localStorage.getItem('userType');
 
-  const menu = [
-    { text: 'Dashboard', icon: <Dashboard />, path: '/dashboard' },
-    { text: 'Car List', icon: <Hotel />, path: '/car-list' },
-    {text :'My Rentals' , icon: <CarRepairOutlined/>, path: '/my-rentals'},
+  const items  = [
+    { text: 'Dashboard', icon: <Dashboard />, path: '/dashboard', role:['admin'] },
+    { text: 'Car List', icon: <Hotel />, path: '/car-list', role:['customer']  },
+    {text :'My Rentals' , icon: <CarRepairOutlined/>, path: '/my-rentals', role:['customer']},
     // { text: 'Room Reservations', icon: <CalendarMonth />, path: '/reservations' },
     // { text: 'Reserved Rooms', icon: <Book />, path: '/reserved-rooms' },
-    { text: 'User Management', icon: <People />, path: '/users' },
-    {text :'Car Rentals' , icon: <CarRental/>, path: '/manage-rentals'}
+    { text: 'User Management', icon: <People />, path: '/users', role:['admin'] },
+    {text :'Car Rentals' , icon: <CarRental/>, path: '/manage-rentals', role:['admin']}
   ];
 
   const handleLogout = () => {
@@ -50,20 +49,20 @@ const SideNav = () => {
     >
       <Box sx={{ flexGrow: 1 }}>
         <List>
-          {menu.map((item) => {
-            const isActive = location.pathname === item.path;
-            return (
+        {items.filter(i=>i.role.includes(role)).map(i=>{
+          const active = loc.pathname===i.path || (i.dynamic && loc.pathname.startsWith(i.path));
+          return (
               <ListItem
                 button
-                key={item.text}
-                onClick={() => navigate(item.path)}
+                key={i.text}
+                onClick={()=>nav(i.dynamic? i.path : i.path)}
                 sx={{
                   backgroundColor: isActive ? '#334155' : 'inherit',
                   '&:hover': { backgroundColor: '#475569' },
                 }}
               >
-                <ListItemIcon sx={{ color: 'white' }}>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
+                <ListItemIcon sx={{ color: 'white' }}>{i.icon}</ListItemIcon>
+                <ListItemText primary={i.text} />
               </ListItem>
             );
           })}

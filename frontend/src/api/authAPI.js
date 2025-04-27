@@ -1,17 +1,13 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/api/auth'; // Change this for production
+const BASE_URL = 'http://localhost:5000/api/auth';
 
-// Register new user
-export const registerUser = async (userData) => {
-  return await axios.post(`${BASE_URL}/register`, userData);
-};
+export const registerUser = (userData) =>
+  axios.post(`${BASE_URL}/register`, userData);
 
-// Login existing user
 export const loginUser = async (credentials) => {
-  const { data } = await axios.post('http://localhost:5000/api/auth/login', credentials);
-  localStorage.setItem('token', data.token);
-  localStorage.setItem('user', JSON.stringify(data.user));
-  localStorage.setItem('userType', data.userType);
+  // ① POST to the /login endpoint
+  const { data } = await axios.post(`${BASE_URL}/login`, credentials);
+  // ② response.data ===== { token, userType, user }
   return data;
 };
