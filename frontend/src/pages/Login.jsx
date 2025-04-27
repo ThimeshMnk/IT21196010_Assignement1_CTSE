@@ -19,15 +19,14 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const {token,userType,user} = await loginUser({email,password})
-      localStorage.setItem('token', token);
-      localStorage.setItem('userType', userType);
-      localStorage.setItem('user', JSON.stringify(user));
-      
-      if(userType==='admin'||userType==='manager') navigate('/dashboard');
-      else navigate('/car-list');
-    } catch(err){
-      alert(err.response?.data?.message||err.message);
+      const res = await loginUser({ email, password });
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userType", res.data.userType);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      alert("Login successful!");
+      navigate("/dashboard");
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed");
     }
   };
 

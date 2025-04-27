@@ -12,18 +12,18 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const drawerWidth = 240;
 
 const SideNav = () => {
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const loc = useLocation();
   const role = localStorage.getItem('userType');
 
-  const items  = [
-    { text: 'Dashboard', icon: <Dashboard />, path: '/dashboard', role:['admin'] },
-    { text: 'Car List', icon: <Hotel />, path: '/car-list', role:['customer']  },
-    {text :'My Rentals' , icon: <CarRepairOutlined/>, path: '/my-rentals', role:['customer']},
+  const menu = [
+    { text: 'Dashboard', icon: <Dashboard />, path: '/dashboard', },
+    { text: 'Car List', icon: <Hotel />, path: '/car-list' },
+    {text :'My Rentals' , icon: <CarRepairOutlined/>, path: '/my-rentals'},
     // { text: 'Room Reservations', icon: <CalendarMonth />, path: '/reservations' },
     // { text: 'Reserved Rooms', icon: <Book />, path: '/reserved-rooms' },
-    { text: 'User Management', icon: <People />, path: '/users', role:['admin'] },
-    {text :'Car Rentals' , icon: <CarRental/>, path: '/manage-rentals', role:['admin']}
+    { text: 'User Management', icon: <People />, path: '/users' },
+    {text :'Car Rentals' , icon: <CarRental/>, path: '/manage-rentals'}
   ];
 
   const handleLogout = () => {
@@ -49,20 +49,20 @@ const SideNav = () => {
     >
       <Box sx={{ flexGrow: 1 }}>
         <List>
-        {items.filter(i=>i.role.includes(role)).map(i=>{
-          const active = loc.pathname===i.path || (i.dynamic && loc.pathname.startsWith(i.path));
-          return (
+          {menu.map((item) => {
+            const isActive = location.pathname === item.path;
+            return (
               <ListItem
                 button
-                key={i.text}
-                onClick={()=>nav(i.dynamic? i.path : i.path)}
+                key={item.text}
+                onClick={() => navigate(item.path)}
                 sx={{
                   backgroundColor: isActive ? '#334155' : 'inherit',
                   '&:hover': { backgroundColor: '#475569' },
                 }}
               >
-                <ListItemIcon sx={{ color: 'white' }}>{i.icon}</ListItemIcon>
-                <ListItemText primary={i.text} />
+                <ListItemIcon sx={{ color: 'white' }}>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
               </ListItem>
             );
           })}

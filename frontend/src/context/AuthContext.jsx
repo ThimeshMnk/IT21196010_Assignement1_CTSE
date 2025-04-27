@@ -1,38 +1,46 @@
 // src/context/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { loginUser as apiLogin, registerUser as apiRegister } from '../api/authAPI';
 
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
-export const AuthProvider = ({ children }) => {
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
   const [userType, setUserType] = useState(null);
-  const [user, setUser]         = useState(null);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    const storedUser = JSON.parse(localStorage.getItem('user') || 'null');
     const storedType = localStorage.getItem('userType');
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedType) setUserType(storedType);
-    if (storedUser) setUser(storedUser);
+    if (token && storedUser && storedType) {
+      setUser(storedUser);
+      setUserType(storedType);
+    }
   }, []);
 
-  const login = (data) => {
-    // called from your login page
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('userType', data.userType);
-    localStorage.setItem('user', JSON.stringify(data.user));
-    setUserType(data.userType);
-    setUser(data.user);
+  const login = async (email, password) => {
+    const { token, user: u, userType: type } = await apiLogin({ email, password });
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(u));
+    localStorage.setItem('userType', type);
+    setUser(u);
+    setUserType(type);
+  };
+
+  const register = async (data) => {
+    await apiRegister(data);
   };
 
   const logout = () => {
     localStorage.clear();
-    setUserType(null);
     setUser(null);
+    setUserType(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, userType, login, logout }}>
+    <AuthContext.Provider value={{ user, userType, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
-};
+}
