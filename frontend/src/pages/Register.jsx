@@ -33,7 +33,7 @@ const Register = () => {
     try {
       await registerUser(formData);
       alert('Registration successful!');
-      navigate('/login');
+      navigate('/dashboard');
     } catch (err) {
       alert(err.response?.data?.message || 'Registration failed');
     }

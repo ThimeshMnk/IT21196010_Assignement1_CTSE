@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/api/auth'; // Change this for production
+const BASE_URL = 'http://localhost:5000/api/auth'; 
 
 // Register new user
 export const registerUser = async (userData) => {

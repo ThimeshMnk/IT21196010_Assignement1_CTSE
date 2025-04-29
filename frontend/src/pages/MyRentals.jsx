@@ -28,7 +28,7 @@ const MyRentals = () => {
   return (
     <Container sx={{ py: 4 }}>
       <Typography variant="h4" gutterBottom>
-        My Bookings
+        My Rentals
       </Typography>
 
       <TableContainer component={Paper} sx={{ borderRadius: 2, overflow: 'hidden' }}>
@@ -55,8 +55,8 @@ const MyRentals = () => {
                 <TableCell>
                   {new Date(r.endDate).toLocaleDateString()}
                 </TableCell>
-                <TableCell>₹{r.car.rentPerDay}</TableCell>
-                <TableCell>₹{r.totalCost}</TableCell>
+                <TableCell>LKR {r.car.rentPerDay}</TableCell>
+                <TableCell>LKR {r.totalCost}</TableCell>
                 <TableCell>{r.status}</TableCell>
               </TableRow>
             ))}

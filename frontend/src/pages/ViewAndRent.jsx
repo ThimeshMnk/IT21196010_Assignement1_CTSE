@@ -19,7 +19,7 @@ const ViewAndRent = () => {
   const [dates, setDates] = useState({ startDate: '', endDate: '' });
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/cars/${id}`)
+    axios.get(`https://car-rental-backend-991854476845.asia-south1.run.app/api/cars/${id}`)
       .then(res => setCar(res.data))
       .catch(err => console.error(err));
   }, [id]);
@@ -39,7 +39,7 @@ const ViewAndRent = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert('Car rented successfully');
-      navigate('/manage-rentals');
+      navigate('/my-rentals');
     } catch (err) {
       console.error(err);
       alert(err.response?.data?.message || 'Rental failed');
@@ -65,7 +65,7 @@ const ViewAndRent = () => {
         <Typography sx={{ mt: 2 }}>
           {car.brand} — {car.model} ({car.year})
         </Typography>
-        <Typography>Rent per day: ₹{car.rentPerDay}</Typography>
+        <Typography>Rent per day: LKR {car.rentPerDay}</Typography>
 
         <Box
           component="form"
