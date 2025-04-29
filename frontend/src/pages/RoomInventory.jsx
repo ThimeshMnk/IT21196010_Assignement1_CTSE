@@ -64,7 +64,7 @@ const CarsList = () => {
                   sx={{ objectFit: 'cover' }}
                 />
               )}
-              <CardContent sx={{ flexGrow: 1, p: 2 , mt : 2 }}>
+              <CardContent sx={{ flexGrow: 1, p: 2 , mt : 1 }}>
                 <Typography variant="h6" gutterBottom noWrap>
                   {car.carName}
                 </Typography>
