@@ -16,7 +16,7 @@ const UserManagement = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/users', {
+      const res = await axios.get('https://car-rental-backend-991854476845.asia-south1.run.app/api/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);

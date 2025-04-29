@@ -18,7 +18,7 @@ const MyRentals = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     axios
-      .get('http://localhost:5000/api/rentals/my', {
+      .get('https://car-rental-backend-991854476845.asia-south1.run.app/api/rentals/my', {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(res => setRentals(res.data))

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5000/api/auth'; 
+const BASE_URL = 'https://car-rental-backend-991854476845.asia-south1.run.app/api/auth'; 
 
 // Register new user
 export const registerUser = async (userData) => {

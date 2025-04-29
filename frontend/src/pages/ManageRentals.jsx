@@ -32,7 +32,7 @@ const ManageRentals = () => {
   const fetchRentals = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/rentals', {
+      const res = await axios.get('https://car-rental-backend-991854476845.asia-south1.run.app/api/rentals', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRentals(res.data);

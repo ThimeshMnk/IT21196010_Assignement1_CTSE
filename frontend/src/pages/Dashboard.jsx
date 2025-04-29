@@ -22,17 +22,17 @@ const Dashboard = () => {
       const token = localStorage.getItem('token');
       try {
         // Users
-        const usersRes = await axios.get('http://localhost:5000/api/users', {
+        const usersRes = await axios.get('https://car-rental-backend-991854476845.asia-south1.run.app/api/users', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setUserCount(usersRes.data.length);
 
         // Cars
-        const carsRes = await axios.get('http://localhost:5000/api/cars');
+        const carsRes = await axios.get('https://car-rental-backend-991854476845.asia-south1.run.app/api/cars');
         setCarCount(carsRes.data.length);
 
         // Rentals
-        const rentalsRes = await axios.get('http://localhost:5000/api/rentals', {
+        const rentalsRes = await axios.get('https://car-rental-backend-991854476845.asia-south1.run.app/api/rentals', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setRentalCount(rentalsRes.data.length);
