@@ -1,8 +1,9 @@
 # cloudbuild.yaml
 options:
   # stream logs only to Cloud Logging, don’t try to write to the default GCS bucket
+  workerPool: projects/$PROJECT_ID/locations/us-central1/workerPools/cloudbuild
   logging: CLOUD_LOGGING_ONLY
-  
+
 substitutions:
   _BACKEND_SERVICE: "car-rental-backend"
   _FRONTEND_SERVICE: "car-rental-frontend"
