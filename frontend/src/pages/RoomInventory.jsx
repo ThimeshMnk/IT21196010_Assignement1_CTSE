@@ -55,7 +55,7 @@ const CarsList = () => {
                   {car.brand} — {car.model} ({car.year})
                 </Typography>
                 <Typography variant="body2" sx={{ mt: 1 }}>
-                  Rent / day: LKR {car.rentPerDay}
+                  Rent / day: ₹{car.rentPerDay}
                 </Typography>
                 <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
                   <Chip
