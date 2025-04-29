@@ -16,7 +16,7 @@ steps:
       [
         'build',
         '-t', 'gcr.io/$PROJECT_ID/${_BACKEND_SERVICE}:$SHORT_SHA',
-        './backend'
+        './Backend'
       ]
   - name: 'gcr.io/cloud-builders/docker'
     args:
