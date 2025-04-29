@@ -34,17 +34,17 @@ const CarsList = () => {
 
   return (
     <Container sx={{ py: 4 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{color : "white"}}>
         Available Cars
       </Typography>
 
-      <Grid container spacing={4} justifyContent="center">
+      <Grid container spacing={4} justifyContent="flex-start">
         {cars.map((car) => (
           <Grid item key={car._id}>
             <Card
               sx={{
                 width: 300,
-                height: 420,
+                height: 400,
                 display: 'flex',
                 flexDirection: 'column',
                 boxShadow: theme.shadows[3],

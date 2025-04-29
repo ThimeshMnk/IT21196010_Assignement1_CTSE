@@ -34,7 +34,7 @@ const ViewAndRent = () => {
     const token = localStorage.getItem('token');
     try {
       await axios.post(
-        'https://car-rental-backend-991854476845.asia-south1.run.app/rentals',
+        'https://car-rental-backend-991854476845.asia-south1.run.app/api/rentals',
         { carId: id, ...dates },
         { headers: { Authorization: `Bearer ${token}` } }
       );
