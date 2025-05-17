@@ -10,6 +10,12 @@ import {
   Box,
   Chip,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  MenuItem,
   useTheme
 } from '@mui/material';
 import axios from 'axios';
@@ -18,6 +24,18 @@ const CarsList = () => {
   const [cars, setCars] = useState([]);
   const loc = useLocation();
   const theme = useTheme();
+  const statusOptions = ['Available', 'Rented'];
+  const [open, setOpen] = useState(false);
+  const [newCar, setNewCar] = useState({
+    carName: '',
+    brand: '',
+    model: '',
+    year: '',
+    plateNumber: '',
+    rentPerDay: '',
+    status: 'Available',
+    imageUrl: '',
+  });
 
   const fetchCars = async () => {
     try {
@@ -32,6 +50,40 @@ const CarsList = () => {
     fetchCars();
   }, [loc]);
 
+  const handleOpen = () => {
+    setNewCar({
+      carName: '',
+      brand: '',
+      model: '',
+      year: '',
+      plateNumber: '',
+      rentPerDay: '',
+      status: 'Available',
+      imageUrl: '',
+    });
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewCar((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post(
+        'http://localhost:5000/api/cars',
+        newCar,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      handleClose();
+      fetchCars();
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to add car');
+    }
+  };
   return (
     <Container sx={{ py: 4 }}>
       <Typography variant="h4" gutterBottom sx={{color : "white"}}>

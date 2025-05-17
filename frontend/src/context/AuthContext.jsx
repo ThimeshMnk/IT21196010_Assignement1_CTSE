@@ -1,4 +1,3 @@
-// src/context/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { loginUser as apiLogin, registerUser as apiRegister } from '../api/authAPI';
 
@@ -43,4 +42,4 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-}
+} 

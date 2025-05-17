@@ -36,7 +36,9 @@ import Layout from "./components/Layout";
 import ReservedRooms from "./pages/ReservedRooms";
 import ManageRentals from "./pages/ManageRentals";
 import ViewAndRent from "./pages/ViewAndRent";
-import MyRentals from './pages/MyRentals';
+import MyRentals from "./pages/MyRentals";
+import CarManagement from "./pages/CarManagement";
+
 function App() {
   return (
     <Router>
@@ -109,6 +111,15 @@ function App() {
           element={
             <Layout>
               <MyRentals />{" "}
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/manage-cars"
+          element={
+            <Layout>
+              <CarManagement />
             </Layout>
           }
         />

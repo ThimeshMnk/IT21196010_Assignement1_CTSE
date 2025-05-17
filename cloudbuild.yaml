@@ -9,6 +9,26 @@ substitutions:
   _FRONTEND_SERVICE: "car-rental-frontend"
   _REGION: "asia-south1"
 
+availableSecrets:
+  secretManager:
+  - versionName: "projects/$PROJECT_ID/secrets/SONARCLOUD_TOKEN/versions/latest"
+    env: ["SONAR_TOKEN"]
+
+steps:
+  # 1) Install sonar-scanner
+  - name: "gcr.io/cloud-builders/npm"
+    args: ["install", "-g", "sonarqube-scanner"]
+
+  # 2) Run SonarCloud analysis
+  - name: "gcr.io/cloud-builders/sonarqube-scanner"
+    entrypoint: "sonar-scanner"
+    args: [
+      "-Dsonar.login=${SONAR_TOKEN}"
+    ]
+    volumes:
+      - name: "$HOME/.sonar/cache"
+        path: "/root/.sonar/cache"
+        
 steps:
   # ── Build & Push Backend ─────────────────────────────────────
   - name: 'gcr.io/cloud-builders/docker'

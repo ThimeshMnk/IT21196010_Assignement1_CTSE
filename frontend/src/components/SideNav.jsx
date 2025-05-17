@@ -31,7 +31,9 @@ const SideNav = () => {
     // { text: 'Room Reservations', icon: <CalendarMonth />, path: '/reservations' },
     // { text: 'Reserved Rooms', icon: <Book />, path: '/reserved-rooms' },
     { text: "User Management", icon: <People />, path: "/users" },
-    { text: "Car Rentals", icon: <CarRental />, path: "/manage-rentals" },
+    { text: "Manage Rentals", icon: <CarRental />, path: "/manage-rentals" },
+    { text: "Car Management", icon: <CarRental />, path: "/manage-cars" },
+    
   ];
 
   const handleLogout = () => {

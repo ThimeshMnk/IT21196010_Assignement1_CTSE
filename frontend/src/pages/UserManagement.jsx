@@ -43,7 +43,7 @@ const UserManagement = () => {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/users/${id}`, {
+      await axios.delete(`https://car-rental-backend-991854476845.asia-south1.run.app/api/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchUsers();
@@ -56,7 +56,7 @@ const UserManagement = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/users/${selectedUser._id}`,
+        `https://car-rental-backend-991854476845.asia-south1.run.app/api/users/${selectedUser._id}`,
         selectedUser,
         { headers: { Authorization: `Bearer ${token}` } }
       );
