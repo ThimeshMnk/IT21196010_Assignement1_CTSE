@@ -66,7 +66,7 @@ const ManageRentals = () => {
     if (!window.confirm('Are you sure you want to delete this rental?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/rentals/${id}`, {
+      await axios.delete(`https://car-rental-backend-991854476845.asia-south1.run.app/api/rentals/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchRentals();
@@ -92,7 +92,7 @@ const ManageRentals = () => {
 
       // Send JSON payload with content-type header
       const res = await axios.put(
-        `http://localhost:5000/api/rentals/${_id}`,
+        `https://car-rental-backend-991854476845.asia-south1.run.app/api/rentals/${_id}`,
         { status, startDate, endDate },
         {
           headers: {

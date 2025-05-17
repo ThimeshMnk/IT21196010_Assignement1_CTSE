@@ -74,7 +74,7 @@ const CarsList = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        'http://localhost:5000/api/cars',
+        'https://car-rental-backend-991854476845.asia-south1.run.app/api/cars',
         newCar,
         { headers: { Authorization: `Bearer ${token}` } }
       );
